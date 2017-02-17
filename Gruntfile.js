@@ -12,13 +12,17 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     webpack: {
-      entry: "./src/main.js",
-      output: {
-        path: "dist/scripts/",
-        filename: "bundle.js"
+      default: {
+        entry: "./src/client.js",
+        output: {
+          path    : "public/scripts/",
+          filename: "bundle.js"
+        }
       }
     }
   });
+
+  grunt.loadNpmTasks("grunt-webpack");
 
   grunt.registerTask("default", ["webpack"]);
 

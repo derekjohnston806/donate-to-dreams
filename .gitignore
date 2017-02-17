@@ -7,3 +7,5 @@ npm-debug.log
 
 # Project Files
 dist/
+public/scripts/bundle.js
+public/scripts/bundle.min.js
