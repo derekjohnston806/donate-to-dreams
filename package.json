@@ -4,6 +4,7 @@
   "description": "A web application to help our local branch of Communities-in-Schools with their fundraising gala. This web application will import the guests' bidder information and during the \"Donate to Dreams\" portion of the event, will recognize those who donate in real-time via a projected display.",
   "main": "dist/main.js",
   "scripts": {
+    "start": "node dist/server.js",
     "test": "jest"
   },
   "repository": {
@@ -24,7 +25,14 @@
     "grunt-babel": "^6.0.0",
     "grunt-contrib-uglify": "^2.1.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-exec": "^1.0.1",
     "grunt-webpack": "^2.0.1",
+    "jest": "^18.1.0",
     "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "express": "^4.14.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
