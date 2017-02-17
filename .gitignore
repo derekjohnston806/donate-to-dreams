@@ -1,0 +1,9 @@
+# macOS Files
+.DS_Store
+
+# Node.js Files
+node_modules/
+npm-debug.log
+
+# Project Files
+dist/
