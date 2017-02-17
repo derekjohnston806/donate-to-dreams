@@ -17,7 +17,13 @@
   },
   "homepage": "https://github.com/derekjohnston806/donate-to-dreams#readme",
   "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
     "grunt": "^1.0.1",
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-uglify": "^2.1.0",
+    "grunt-contrib-watch": "^1.0.0",
     "grunt-webpack": "^2.0.1",
     "webpack": "^2.2.1"
   }
