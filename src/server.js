@@ -12,8 +12,7 @@ import path from "path";
 
 const server  = express();
 const port    = process.env.PORT || 8888;
-const dir     = path.join(__dirname, "public");
-const staticMiddleware  = express.static(dir);
+const staticMiddleware  = express.static("public");
 
 server.use(staticMiddleware);
 

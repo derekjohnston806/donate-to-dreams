@@ -5,6 +5,7 @@
   "main": "dist/main.js",
   "scripts": {
     "start": "node dist/server.js",
+    "start-dev": "nodemon dist/server.js",
     "test": "jest"
   },
   "repository": {
