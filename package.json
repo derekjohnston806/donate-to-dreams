@@ -1,0 +1,19 @@
+{
+  "name": "donate-to-dreams",
+  "version": "1.0.0",
+  "description": "A web application to help our local branch of Communities-in-Schools with their fundraising gala. This web application will import the guests' bidder information and during the \"Donate to Dreams\" portion of the event, will recognize those who donate in real-time via a projected display.",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derekjohnston806/donate-to-dreams.git"
+  },
+  "author": "Derek Johnston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/derekjohnston806/donate-to-dreams/issues"
+  },
+  "homepage": "https://github.com/derekjohnston806/donate-to-dreams#readme"
+}
