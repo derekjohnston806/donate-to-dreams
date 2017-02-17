@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/derekjohnston806/donate-to-dreams/issues"
   },
-  "homepage": "https://github.com/derekjohnston806/donate-to-dreams#readme"
+  "homepage": "https://github.com/derekjohnston806/donate-to-dreams#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-webpack": "^2.0.1",
+    "webpack": "^2.2.1"
+  }
 }
