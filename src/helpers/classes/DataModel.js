@@ -32,6 +32,8 @@ class DataModel {
     } else {
       console.log("No data detected, creating empty model.");
       this.data = {
+        raised: 0,
+        bids: [],
         summary: {},
         participants: {}
       }
@@ -150,13 +152,94 @@ class DataModel {
 
     participant.number = participantData.number;
     participant.name = participantData.name;
-    participant.note = participant.note;
+    participant.note = participantData.note;
 
     const participantID = generateDataModelIDString([participant.number, participant.name]);
 
-    this.data.participants[participantID] = participant; 
+    this.data.participants[participantID] = participant;
 
     this.update();
+  }
+
+  /**
+    newBidForParticipant(bid)
+
+    @desc:
+      -
+
+    @param:
+      -
+
+    @return:
+      -
+  */
+  newBidForParticipant(bid) {
+    console.log("Data Model Bid:", bid);
+    const participants = this.data.participants;
+    let bidder;
+    let bidderID;
+
+    for (let key in participants) {
+      const participant = participants[key];
+      console.log(participant.number, bid.number);
+      if (String(participant.number) === String(bid.number)) {
+        bidderID = key;
+        bidder = participant;
+        break;
+      }
+    }
+
+    const bidData = {
+      number: bidder.number,
+      time: new Date().toLocaleTimeString(),
+      name: bidder.name,
+      amount: parseInt(bid.amount)
+    };
+
+    bidder.contribution += parseInt(bid.amount);
+    this.data.raised += parseInt(bid.amount);
+    this.data.participants[bidderID] = bidder;
+    this.data.bids.push(bidData);
+
+    this.update();
+  }
+
+  /**
+    createNewParticipant(name)
+
+    @desc:
+      - Given a name string, create a new participant on the fly
+        and return that participant's new bidder number.
+
+    @param:
+      - name (String): The name for the particiapnt.
+
+    @return:
+      - (String): The bidder number for the participant.
+  */
+  createNewParticipant(name) {
+      this.refresh();
+      let newBidNumber = 0;
+      for (let key in this.data.participants) {
+        const participant = this.data.participants[key];
+        if (participant.number > newBidNumber) {
+          newBidNumber = parseInt(participant.number);
+        }
+      }
+
+      newBidNumber += 1;
+
+      const newParticipantID = generateDataModelIDString([String(newBidNumber), name]);
+      const newParticipant = {
+        number: String(newBidNumber),
+        name: name,
+        note: "",
+        contribution: 0
+      };
+
+      this.data.participants[newParticipantID] = newParticipant;
+      this.update();
+      return newBidNumber;
   }
 }
 

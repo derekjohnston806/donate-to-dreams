@@ -25,7 +25,24 @@ class Form extends Component {
   constructor(props) {
     super(props);
 
+    this.setClassName = this.setClassName.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  /**
+    setClassName()
+
+    @desc:
+      - This method will let the developer select if this form should be inline.
+
+    @param:
+      - null
+
+    @return:
+      - (String): The appropriate classname for the form.
+  */
+  setClassName() {
+    return this.props.isInline ? "form-inline" : "";
   }
 
   /**
@@ -59,7 +76,7 @@ class Form extends Component {
       - null
   */
   render() {
-    return <form id={this.props.id} onSubmit={this.handleSubmit}>
+    return <form className={this.setClassName()} id={this.props.id} onSubmit={this.handleSubmit}>
       {this.props.children}
     </form>
   }
@@ -67,7 +84,8 @@ class Form extends Component {
 
 Form.propTypes = {
   id: React.PropTypes.string.isRequired,
-  onSubmit: React.PropTypes.func.isRequired
+  onSubmit: React.PropTypes.func.isRequired,
+  isInline: React.PropTypes.bool
 };
 
 export default Form;

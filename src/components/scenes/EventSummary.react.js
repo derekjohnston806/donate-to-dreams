@@ -10,9 +10,11 @@
 */
 import React, { Component } from "react";
 import Container from "../bootstrap/Container.react";
+import Button from "../bootstrap/Button.react";
 import Row from "../bootstrap/Row.react";
 import H1 from "../html/H1.react";
 import HR from "../html/HR.react";
+import Col from "../bootstrap/Col.react";
 import EventSummaryList from "../app/EventSummaryList.react";
 import ParticipantsTable from "../app/ParticipantsTable.react";
 import NewParticipantModal from "../app/NewParticipantModal.react";
@@ -44,6 +46,25 @@ class EventSummary extends Component {
     this.handleNewParticipantSubmit = this.handleNewParticipantSubmit.bind(this);
     this.handleParticipantUpdate = this.handleParticipantUpdate.bind(this);
     this.handleParticipantDelete = this.handleParticipantDelete.bind(this);
+    this.handleStartEvent = this.handleStartEvent.bind(this);
+  }
+
+  /**
+    handleStartEvent()
+
+    @desc:
+      - Navigate to the EventRunner scene.
+
+    @param:
+      - null
+
+    @return:
+      - null
+  */
+  handleStartEvent() {
+    console.log("Starting event...");
+    console.log(this.props);
+    this.props.router.push("runEvent");
   }
 
   /**
@@ -83,6 +104,7 @@ class EventSummary extends Component {
       name: $("#participant-details-name").val(),
       note: $("#participant-details-note").val()
     };
+    console.log("Updating data:", participantData);
     this.state.dataModel.refresh();
     this.state.dataModel.updateParticipant(participantData);
     this.setState({
@@ -126,7 +148,14 @@ class EventSummary extends Component {
   render() {
     console.log(this.state.dataModel);
     return <Container>
-      <H1 text="Event Summary" />
+      <Row>
+        <Col width="10">
+          <H1 text="Event Summary" />
+        </Col>
+        <Col width="2" style={{paddingTop: "24px"}}>
+          <Button style="success" text="Start Event" onClick={this.handleStartEvent} />
+        </Col>
+      </Row>
       <HR />
       <EventSummaryList data={this.state.dataModel.data.summary}/>
       <HR />

@@ -23,13 +23,14 @@ class Col extends Component {
       - null
   */
   render() {
-    return <div className={ "col-md-" + this.props.width }>
+    return <div style={this.props.style} className={ "col-md-" + this.props.width }>
       { this.props.children }
     </div>
   }
 }
 
 Col.propTypes = {
+  style: React.PropTypes.object,
   width: React.PropTypes.string.isRequired
 };
 

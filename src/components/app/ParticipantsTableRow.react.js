@@ -11,6 +11,7 @@ import React, { Component } from "react";
 import TR from "../html/TR.react";
 import TD from "../html/TD.react";
 import generateDataModelIDString from "../../helpers/generateDataModelIDString";
+import formatCurrency from "../../helpers/formatCurrency";
 
 class ParticipantsTableRow extends Component {
   /**
@@ -64,7 +65,7 @@ class ParticipantsTableRow extends Component {
       <TD text={this.props.number} />
       <TD text={this.props.name} />
       <TD text={this.props.note} />
-      <TD text={this.props.contribution} />
+      <TD text={formatCurrency(this.props.contribution)} />
     </TR>
   }
 }
