@@ -20,6 +20,7 @@ import ParticipantsTable from "../app/ParticipantsTable.react";
 import NewParticipantModal from "../app/NewParticipantModal.react";
 import ParticipantDetailsModal from "../app/ParticipantDetailsModal.react";
 import DataModel from "../../helpers/classes/DataModel";
+import GoalProgress from "../app/GoalProgress.react";
 
 class EventSummary extends Component {
   /**
@@ -158,6 +159,8 @@ class EventSummary extends Component {
       </Row>
       <HR />
       <EventSummaryList data={this.state.dataModel.data.summary}/>
+      <HR />
+      <GoalProgress raised={this.state.dataModel.data.raised} />
       <HR />
       <ParticipantsTable data={this.state.dataModel.data.participants} />
       <NewParticipantModal onSubmit={this.handleNewParticipantSubmit} />
