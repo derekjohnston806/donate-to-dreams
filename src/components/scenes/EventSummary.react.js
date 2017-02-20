@@ -16,6 +16,7 @@ import HR from "../html/HR.react";
 import EventSummaryList from "../app/EventSummaryList.react";
 import ParticipantsTable from "../app/ParticipantsTable.react";
 import NewParticipantModal from "../app/NewParticipantModal.react";
+import ParticipantDetailsModal from "../app/ParticipantDetailsModal.react";
 import DataModel from "../../helpers/classes/DataModel";
 
 class EventSummary extends Component {
@@ -41,6 +42,8 @@ class EventSummary extends Component {
     };
 
     this.handleNewParticipantSubmit = this.handleNewParticipantSubmit.bind(this);
+    this.handleParticipantUpdate = this.handleParticipantUpdate.bind(this);
+    this.handleParticipantDelete = this.handleParticipantDelete.bind(this);
   }
 
   /**
@@ -60,6 +63,52 @@ class EventSummary extends Component {
     this.setState({
       dataModel: this.state.dataModel
     })
+  }
+
+  /**
+    handleParticipantUpdate(participantID)
+
+    @desc:
+      - Given the participantID, update the data model object.
+
+    @param:
+      - participantID (String): The ID for the participant.
+
+    @return:
+      - null
+  */
+  handleParticipantUpdate(participantID) {
+    const participantData = {
+      number: $("#participant-details-number").val(),
+      name: $("#participant-details-name").val(),
+      note: $("#participant-details-note").val()
+    };
+    this.state.dataModel.refresh();
+    this.state.dataModel.updateParticipant(participantData);
+    this.setState({
+      dataModel: this.state.dataModel
+    });
+  }
+
+  /**
+    handleParticipantDelete(participantID)
+
+    @desc:
+      - Remove a participant from the database.
+
+    @param:
+      - null
+
+    @return:
+      - null
+  */
+  handleParticipantDelete() {
+    this.state.dataModel.refresh();
+    this.state.dataModel.deleteParticipantWithID(this.state.dataModel.data.editingParticipantID);
+    this.setState({
+      dataModel: this.state.dataModel
+    });
+    $("#participant-details-modal").modal("hide");
   }
 
   /**
@@ -83,6 +132,7 @@ class EventSummary extends Component {
       <HR />
       <ParticipantsTable data={this.state.dataModel.data.participants} />
       <NewParticipantModal onSubmit={this.handleNewParticipantSubmit} />
+      <ParticipantDetailsModal onSubmit={this.handleParticipantUpdate} onDelete={this.handleParticipantDelete} />
     </Container>
   }
 }

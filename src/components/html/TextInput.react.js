@@ -59,6 +59,7 @@ class TextInput extends Component {
   */
   render() {
     return <input
+      id={this.props.id}
       type="text"
       className="form-control"
       value={this.props.value}

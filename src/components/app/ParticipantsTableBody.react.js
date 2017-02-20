@@ -13,6 +13,7 @@ import ParticipantsTableEmptyRow from "./ParticipantsTableEmptyRow.react";
 import ParticipantsTableRow from "./ParticipantsTableRow.react";
 import generateDataModelIDString from "../../helpers/generateDataModelIDString";
 import obj2arr from "../../helpers/obj2arr";
+import DataModel from "../../helpers/classes/DataModel";
 
 class ParticipantsTableBody extends Component {
   /**
@@ -48,6 +49,16 @@ class ParticipantsTableBody extends Component {
   */
   handleRowClick(id) {
     console.log("Row clicked with id:", id);
+
+    let dataModel = new DataModel();
+    dataModel.setEditingParticipantID(id);
+    let participant = dataModel.getParticipantWithID(id);
+    console.log(participant);
+
+    $("#participant-details-number").val(participant.number);
+    $("#participant-details-name").val(participant.name);
+    $("#participant-details-note").val(participant.note);
+    $("#participant-details-modal").modal("show");
   }
 
   /**
@@ -73,7 +84,7 @@ class ParticipantsTableBody extends Component {
           number={participant.number}
           name={participant.name}
           note={participant.note}
-          contribution={participant.contribution}
+          contribution={String(participant.contribution)}
           onClick={this.handleRowClick}
         />
       });

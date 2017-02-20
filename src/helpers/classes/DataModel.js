@@ -7,6 +7,9 @@
     @desc:
       - A class for handling the application's data.
 */
+
+import generateDataModelIDString from "../generateDataModelIDString";
+
 class DataModel {
   /**
     constructor(props)
@@ -72,6 +75,88 @@ class DataModel {
     } else {
       console.log("Attempted to refresh, no data is available.");
     }
+  }
+
+  /**
+    setEditingParticipantID(participantID)
+
+    @desc:
+      - Set the id of the participant currently being edited.
+
+    @param:
+      - participantID (String): The id of the participant currently
+        being edited.
+
+    @return:
+      - null
+  */
+  setEditingParticipantID(participantID)   {
+    console.log("Setting editing participantID: " + participantID);
+    this.data.editingParticipantID = participantID;
+    this.update();
+  }
+
+  /**
+    getParticipantWithID(participantID)
+
+    @desc:
+      - Given the id for a participant, return that participant's data object.
+
+    @param:
+      - participantID (String): The participant's database ID.
+
+    @return:
+      - (Object): The participant's database object.
+  */
+  getParticipantWithID(participantID) {
+      return this.data.participants[participantID];
+  }
+
+  /**
+    deleteParticipantWithID(participantID)
+
+    @desc:
+      - Given a participant's database id, remove that participant from the
+        database.
+
+    @param:
+      - participantID (String): The participant's database id.
+
+    @return:
+      - null
+  */
+  deleteParticipantWithID(participantID) {
+    delete this.data.participants[participantID];
+    this.update();
+  }
+
+  /**
+    updateParticipant(participantID, participantData)
+
+    @desc:
+      - Update a participant's data node for a given ID in the database
+        with the provided participant data.
+
+    @param:
+      - participantData (Object): The new data for the participant.
+
+    @return:
+      - null
+  */
+  updateParticipant(participantData)  {
+    let participant = this.data.participants[this.data.editingParticipantID];
+
+    delete this.data.participants[this.data.editingParticipantID];
+
+    participant.number = participantData.number;
+    participant.name = participantData.name;
+    participant.note = participant.note;
+
+    const participantID = generateDataModelIDString([participant.number, participant.name]);
+
+    this.data.participants[participantID] = participant; 
+
+    this.update();
   }
 }
 
